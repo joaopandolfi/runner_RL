@@ -1,0 +1,38 @@
+<head> 
+    <title> Endless running </title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="title"> Poc RL </div> 
+    <div id="field" class="field"> 
+        <div id="scenario" class="scenario">
+            <div id="player" class="player">
+                <div id="colider" class="colider"></div>
+                <div id="danger_zone" class="danger_zone"></div>
+            </div>
+            <div id="road1" class="road"></div>
+            <div id="road2" class="road"></div>
+            <div id="road3" class="road"></div>
+        </div>
+    </div>
+
+    <br>
+    <div id="legend" class="legend">
+        <div><button onclick="initialize()">Start</button> 
+            <button onclick="stop()">Stop</button> 
+            <button onclick="reset()">Reset</button></div>
+        
+        <div class="title"> Interaction
+            <b><div id="interaction"></b></div> Score: <b><div id="score"></div></b>
+        <div class="title" id="decision"></div>
+
+        <div id="raw" class="raw"></div>
+    </div>
+</body>
+
+<script src="models/player.js"></script>
+<script src="models/obstacles.js"></script>
+<script src="brain/brain.js"></script>
+<script src="brain/sensor.js"></script>
+<script src="game.js"></script>
