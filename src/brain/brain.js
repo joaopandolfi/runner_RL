@@ -49,7 +49,7 @@ function takeDecision(brain, signal) {
         return DecisionUp
     }
 
-    if (mem.down >= (mem.up- _patience) && mem.down <= (mem.stop- _patience)){
+    if (mem.stop >= (mem.up- _patience) && mem.stop <= (mem.down- _patience)){
         return DecisionStop
     }
 
