@@ -1,6 +1,6 @@
 var Player = {
     score:0,
-    road:1,
+    road:2,
     position:0,
     end_x: 0,
     reference:null,

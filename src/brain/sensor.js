@@ -21,7 +21,7 @@ Sensor.ToSignal = (s) => {
 function readSensors(player,obstacles, golds) {
     let caugh_in_sensor = Object.assign({},Sensor)
     if (obstacles != null && obstacles.length) {
-        obstacles.map(o => {
+        obstacles = obstacles.filter(o => {
             o.CalcPosition(o)
             if (player.road == o.road){
                 if (o.HasColided(player,o)){
@@ -51,7 +51,7 @@ function readSensors(player,obstacles, golds) {
     }
 
     if (golds != null && golds.length) {
-        golds.map(o => {
+        golds = golds.filter(o => {
             o.CalcPosition(o)
             if (player.road == o.road){
                 if (o.HasColided(player,o)){
@@ -80,5 +80,5 @@ function readSensors(player,obstacles, golds) {
     }
 
     caugh_in_sensor.road = player.road
-    return caugh_in_sensor
+    return {readed:caugh_in_sensor, obstacles,golds}
 }

@@ -2,6 +2,11 @@
     text-align: center;   
 }
 
+.title2{
+    text-align: center;   
+    font-size: 22px;
+}
+
 body{
     
 }
@@ -27,7 +32,7 @@ body{
     /*width: 20%;*/
     height: 75px;
     margin-left: 10px;
-    margin-top: 22px;
+    margin-top: 160px;
     position: fixed;
     z-index: 999;
 }
@@ -50,7 +55,7 @@ body{
 
 .obstacle{
     float:right;
-    width: 5%;
+    width: 15px;
     height: 100%;
     margin-right: 0%;
     background-color: red;
@@ -59,7 +64,7 @@ body{
 
 .gold{
     float:right;
-    width: 5%;
+    width: 15px;
     height: 100%;
     margin-right: 0%;
     background-color: yellow;

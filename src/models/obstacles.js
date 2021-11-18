@@ -1,6 +1,6 @@
-var GoldReward = 1000
+var GoldReward = 500
 var ObstacleReward = -1000
-var BeAliveReward = 1
+var BeAliveReward = 0
 
 var ObstacleType ="obstacle"
 var GoldType = "gold"
@@ -38,7 +38,7 @@ obstacle.Move = (obj,distance) => {
 }
 
 obstacle.AutoDestroy = (player, obj) => {
-    if (obj.position_x <= (player.end_x +10)) {
+    if (obj.position_x <= (player.end_x +15)) {
         obj.Delete(obj)
         return true
     }

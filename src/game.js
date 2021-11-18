@@ -13,11 +13,16 @@ var _roads = {
 var _clock_time_ms = 100
 var _interactions_patience = 15
 var _interactions = 0
-var _delta_distance = 10
+var _delta_distance = 15
 var _active = false
 var _loop = null
 
+var _golds = 0
+var _walls = 0
+
 function initialize(){
+    _clock_time_ms = parseInt(document.getElementById("speed").value)
+    console.log(_clock_time_ms)
     if (_active){
         if (_loop == null )
         _loop= setInterval(tick,_clock_time_ms)
@@ -27,7 +32,7 @@ function initialize(){
     cleanObstacles()
     player =  newPlayer()
     
-    generateNewObj()
+    //generateNewObj()
     
     _active = true
     _loop= setInterval(tick,_clock_time_ms)
@@ -41,6 +46,9 @@ function stop(){
 
 function reset() {
     _active = false
+    _walls = 0
+    _golds = 0
+    cleanObstacles()
 }
 
 function cleanObstacles() {
@@ -72,10 +80,14 @@ function printStatus(decision,interaction, score) {
     document.getElementById("decision").innerText = decision
     document.getElementById("interaction").innerText = interaction
     document.getElementById("score").innerText = score
+    document.getElementById("gold").innerText = _golds
+    document.getElementById("walls").innerText = _walls
 }
 
 function tick() {
-
+    if (_interactions % _interactions_patience == 0){
+        generateNewObj()
+    }
     for (let i=1;i<=3; i++){
         let last = _roads[i].pop()
         if (last){
@@ -85,7 +97,7 @@ function tick() {
     }    
 
     let sensor = readSensors(player,obstacles,golds)
-    let signal = sensor.ToSignal(sensor)
+    let signal = sensor.readed.ToSignal(sensor.readed)
     let decision = takeDecision(player.brain,signal)
 
     switch (decision) {
@@ -99,22 +111,25 @@ function tick() {
 
     sensor_after_move = readSensors(player,obstacles,golds)
     
-    let reward = BeAliveReward
+    reward = BeAliveReward
 
-    if (sensor_after_move.caugh_gold){
+    if (sensor_after_move.readed.caugh_gold){
+        _golds +=1
         reward = GoldReward
-    } else if (sensor_after_move.colision){
+    } else if (sensor_after_move.readed.colision){
+        _walls +=1
         reward = ObstacleReward
     }
+
+    obstacles = sensor_after_move.obstacles
+    golds = sensor_after_move.golds
 
     learn(player.brain,signal,decision, reward)
     addScore(player,reward)
 
     _interactions+=1
 
-    if (_interactions % _interactions_patience == 0){
-        generateNewObj()
-    }
+   
 
     printStatus(decision,_interactions,player.score)
 }
