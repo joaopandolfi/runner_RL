@@ -38,11 +38,11 @@ function readSensors(player,obstacles, golds) {
                 }
             }
             
-            if (player.road < o.road && o.AreInDangerZone(player,o)) {
+            if (player.road < o.road && o.HasColided(player,o)) {
                 caugh_in_sensor.obstacle_in_left = 1
             }
             
-            if (player.road > o.road && o.AreInDangerZone(player,o)) {
+            if (player.road > o.road && o.HasColided(player,o)) {
                     caugh_in_sensor.obstacle_in_right = 1
             }
             
